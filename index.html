@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#181d25">
+    <title>منصة مواهب المدية</title>
+    <!-- خط Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- مكتبة الأيقونات FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- الهيدر -->
+    <!-- الهيدر -->
+    <header>
+      <div class="btn-group-header">
+        <button data-toggle="profileList"><i class="fa fa-bars"></i></button>
+
+        <!-- ✅ تم تحويل زر البحث إلى رابط مع الحفاظ على نفس التصميم -->
+        <a href="search/search.html" class="search-btn" aria-label="البحث">
+          <button><i class="fa fa-search"></i></button>
+        </a>
+      </div>
+
+      <div class="mainLogo">
+        <img src="assets/images/medea.png" alt="شعار مواهب المدية" />
+      </div>
+
+      <!-- القائمة المنبثقة للملف الشخصي -->
+      <div class="popup profileList">
+        <div class="header">
+          <h1>Medea mawahib ID</h1>
+          <button class="btnClose" data-close>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="main">
+          <h1 id="profilePopupTitle">سجل</h1>
+          <p id="profilePopupText">
+            لكي نتمكن من التواصل معك لاحقا,<br />
+            و عرضك كموهبة
+          </p>
+          <a href="register/register.html" class="login">سجل الان</a>
+          <div class="overlay"></div>
+
+          <!-- العناصر الأصلية للقائمة -->
+          <div class="search">
+            <a href="search/search.html">
+              <i class="fa-solid fa-search"></i>ابحث عن المواهب لدينا
+            </a>
+          </div>
+          <div class="whoUs">
+            <a href="#about"> <i class="fa-solid fa-hard-drive"></i>من نحن </a>
+          </div>
+          <div class="categories">
+            <a href="#categories">
+              <i class="fa-solid fa-gear"></i>فئات المواهب
+            </a>
+          </div>
+          <div class="partners">
+            <a href="#partners">
+              <i class="fa-solid fa-handshake"></i> شركاؤنا
+            </a>
+          </div>
+          <div class="testimonials">
+            <a href="#testimonials">
+              <i class="fa-solid fa-quote-right"></i> شهادات المواهب
+            </a>
+          </div>
+          <div class="overlay"></div>
+          <div class="newsletter">
+            <a href="#newsletter">
+              <i class="fa-solid fa-bell"></i> النشرة الإخبارية
+            </a>
+          </div>
+          <div class="suggestions">
+            <a href="#suggestions">
+              <i class="fa-solid fa-lightbulb"></i> اقتراحاتكم
+            </a>
+          </div>
+        </div>
+        <div class="footer">
+          <a href="#">Technologies</a>
+          <a href="#">About medea mawahib</a>
+          <a href="#">Terms of service</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Report a violation</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <main>
+      <div class="video-container">
+        <video
+          src="assets/images/mainVideo2.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+        <div class="video-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1>منصة مواهب المدية</h1>
+        <p>الحاضنة الأولى للإبداع والتميز</p>
+
+        <div class="btns">
+          <!-- زر التسجيل كرابط -->
+          <a href="register/register.html" class="button primary-btn"
+            >سجل كموهبة</a
+          >
+
+          <!-- زر البحث عن المواهب كرابط -->
+          <a href="search/search.html" class="button">المواهب</a>
+        </div>
+
+        <div class="trust-indicators">
+          <div class="trust-item">
+            <span class="trust-number">50K+</span>
+            <span class="trust-label">متابع</span>
+          </div>
+          <div class="trust-divider"></div>
+          <!-- ✅ أضف id="talentCount" لعداد المواهب فقط (اترك باقي الهيكل كما هو) -->
+          <div class="trust-item">
+            <span class="trust-number" id="talentCount"></span>
+            <span class="trust-label">موهبة مسجلة</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-glow"></div>
+
+      <button
+        class="scroll-indicator"
+        onclick="
+          document
+            .getElementById('about')
+            .scrollIntoView({ behavior: 'smooth' })
+        "
+      >
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </main>
+
+    <!-- قسم من نحن -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>من نحن</h2>
+          <p>جسر يربط بين الإبداع والفرص في قلب المدية</p>
+        </div>
+        <div class="about-content">
+          <p>
+            "منصة مواهب المدية" هي أكثر من مجرد موقع إلكتروني؛ إنها الحاضنة
+            الرقمية الأولى التي وُلدت من قلب مدينة المدية لتكون جسراً يربط بين
+            الإبداع والفرص. نحن نؤمن بأن كل موهبة -سواء كانت في الفنون، التقنية،
+            أو الصناعات الإبداعية- تستحق أن تجد طريقها إلى النور.
+          </p>
+          <p>
+            هدفنا الأساسي هو ردم الفجوة بين الموهوبين والمجتمع، من خلال توفير
+            بيئة تفاعلية تدعم تطوير المهارات، تعزز الظهور الرقمي، وتخلق فرصاً
+            حقيقية للنمو والنجاح. نحن هنا لنحتفي بهوية المدية الإبداعية ونصدرها
+            للعالم.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم فئات المواهب -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        <div class="section-header">
+          <h2>فئات المواهب</h2>
+          <p>استكشف المجالات الإبداعية المتاحة للانضمام</p>
+        </div>
+
+        <div class="categories-grid">
+          <div class="category-card cat-purple">
+            <i class="fa-solid fa-palette card-bg-icon"></i>
+            <h3>الفنون البصرية</h3>
+          </div>
+          <div class="category-card cat-blue">
+            <i class="fa-solid fa-music card-bg-icon"></i>
+            <h3>الموسيقى والأداء</h3>
+          </div>
+          <div class="category-card cat-green">
+            <i class="fa-solid fa-pen-nib card-bg-icon"></i>
+            <h3>الكتابة والإبداع</h3>
+          </div>
+          <div class="category-card cat-orange">
+            <i class="fa-solid fa-laptop-code card-bg-icon"></i>
+            <h3>التكنولوجيا</h3>
+          </div>
+          <div class="category-card cat-red">
+            <i class="fa-solid fa-video card-bg-icon"></i>
+            <h3>الإنتاج السينمائي</h3>
+          </div>
+          <div class="category-card cat-teal">
+            <i class="fa-solid fa-microphone-lines card-bg-icon"></i>
+            <h3>البودكاست والصوتيات</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ [تعديل] قسم شركاؤنا - شبكة ثابتة احترافية -->
+    <!-- ✅ استبدل قسم الشركاء القديم بهذا الكود فقط -->
+    <section id="partners" class="partners-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>كن شريكاً في النجاح</h2>
+          <p>
+            نبحث عن مؤسسات وشركات تؤمن بمواهب المدية لتوسيع دائرة الفرص والإبداع
+            معنا
+          </p>
+        </div>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto">
+          <a
+            href="mailto:nidalbenyakhelf@gmail.com?subject=طلب شراكة - منصة مواهب المدية&body=السلام عليكم ورحمة الله،%0A%0Aأرغب في مناقشة فرص التعاون مع منصتكم:%0A%0A- اسم المؤسسة/الشركة:%0A- نوع الشراكة المقترحة:%0A- رقم التواصل:%0A%0Aمع التحية،"
+            id="partnerBtn"
+            class="submit-btn"
+            style="
+              display: inline-block;
+              text-decoration: none;
+              width: auto;
+              padding: 1rem 3rem;
+            "
+          >
+            تواصل معنا للشراكة
+            <i class="fa-solid fa-handshake" style="margin-right: 8px"></i>
+          </a>
+          <p
+            style="
+              margin-top: 20px;
+              color: #94a3b8;
+              font-size: 0.9rem;
+              line-height: 1.8;
+            "
+          >
+            سواء كنت تمثل مؤسسة حكومية، شركة خاصة، أو جمعية ثقافية،<br />
+            نحن هنا لبناء جسور التعاون التي تخدم الموهوبين في ولاية المدية.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الشهادات -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>شهادات مواهبنا</h2>
+          <p>قصص نجاح حقيقية من منصتنا</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <i class="fa-solid fa-quote-right"></i>
+            </div>
+            <p class="testimonial-text">
+              منصة مواهب المدية غيّرت مساري بالكامل، من موهبة مجهولة إلى فرص
+              حقيقية.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">أ</div>
+              <div class="author-info">
+                <span class="author-name">أمينة بلحاج</span>
+                <span class="author-role">مصورة فوتوغرافية</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <i class="fa-solid fa-quote-right"></i>
+            </div>
+            <p class="testimonial-text">
+              الدعم والمتابعة اللي لقيتها هنا ما لقيتها بأي مكان تاني، فريق يهتم
+              فعلاً.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">ي</div>
+              <div class="author-info">
+                <span class="author-name">يوسف عمراني</span>
+                <span class="author-role">مخرج أفلام قصيرة</span>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="quote-icon">
+              <i class="fa-solid fa-quote-right"></i>
+            </div>
+            <p class="testimonial-text">
+              بفضل المنصة قدرت أوصل شغلي لجمهور أوسع وأتعرف على مواهب تانية بنفس
+              شغفي.
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">س</div>
+              <div class="author-info">
+                <span class="author-name">سارة مرابط</span>
+                <span class="author-role">كاتبة محتوى</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم النشرة الإخبارية -->
+    <section id="newsletter" class="newsletter-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>اشترك في نشرتنا الإخبارية</h2>
+          <p>كن أول من يعرف عن الفرص الجديدة والفعاليات القادمة</p>
+        </div>
+
+        <form class="newsletter-form">
+          <div class="input-group">
+            <input type="email" placeholder="أدخل بريدك الإلكتروني" required />
+          </div>
+
+          <div class="select-group">
+            <select>
+              <option value="ar">العربية</option>
+              <option value="fr">Français</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          <button type="submit" class="submit-btn">اشتراك</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- قسم الاقتراحات -->
+    <section class="suggestion-section" id="suggestions">
+      <div class="container">
+        <div class="section-header">
+          <h2>قدم اقتراحاً لنا</h2>
+          <p>رأيك يهمنا لتطوير المنصة وخدمة الموهوبين بشكل أفضل</p>
+        </div>
+
+        <form class="suggestion-form">
+          <div class="form-row">
+            <input type="email" placeholder="بريدك الإلكتروني" required />
+          </div>
+          <div class="form-row">
+            <textarea
+              placeholder="اكتب اقتراحك هنا..."
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">إرسال الاقتراح</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <h3>مواهب المدية</h3>
+        <p>&copy; <span id="current-year"></span> جميع الحقوق محفوظة.</p>
+      </div>
+    </footer>
+    <!-- ✅ 1. استدعاء مكتبات Firebase (يجب أن تكون قبل script.js) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- ✅ 2. استدعاء سكريبت الموقع -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

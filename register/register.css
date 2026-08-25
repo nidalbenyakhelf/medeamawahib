@@ -1,0 +1,256 @@
+/* ========================================
+IMPORTS & RESET
+======================================== */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap");
+*, *::before, *::after { padding: 0; margin: 0; box-sizing: border-box; }
+
+/* ========================================
+ROOT VARIABLES (Dark Mode Theme)
+======================================== */
+:root {
+--main-bg-color: rgb(24, 29, 37);
+--main-bg-btn: rgba(255, 255, 255, 0.05);
+--accent: #00f5a0;
+--accent-hover: #00d9f5;
+--main-color-text: #fff;
+--main-border: 1px solid rgba(255, 255, 255, 0.2);
+--main-border-radius: 12px;
+}
+
+/* ========================================
+BASE ELEMENTS
+======================================== */
+body {
+min-height: 100vh; width: 100%; background-color: var(--main-bg-color);
+font-family: "Cairo", sans-serif; font-size: 16px; color: var(--main-color-text);
+}
+h1 { font-size: 2.2rem; color: var(--main-color-text); line-height: 1.2; text-align: center; }
+h2 { font-size: 1.1rem; color: var(--main-color-text); }
+label { font-size: 0.95rem; font-weight: 600; color: #cbd5e1; display: block; margin-bottom: 0.3em; }
+input, select, textarea {
+font-size: 1rem; color: var(--main-color-text); width: 100%; height: 3em;
+padding: 0 10px; background-color: var(--main-bg-btn); border: var(--main-border);
+border-radius: var(--main-border-radius); outline: none; transition: border-color 0.2s ease;
+font-family: "Cairo", sans-serif;
+}
+textarea { height: auto; padding: 10px; resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+p { font-size: 0.875rem; color: #cbd5e1; line-height: 1.6; }
+span { font-size: 0.875rem; color: #cbd5e1; }
+a { text-decoration: none; color: var(--accent); }
+
+/* ========================================
+LOGO ICON (✅ مركزية تماماً + بدون تكرار)
+======================================== */
+.logo-icon {
+width: 80px; height: 80px; 
+background: linear-gradient(to right, #00f5a0, #00d9f5);
+border-radius: 50%; 
+display: flex; /* ✅ ضروري للتوسيط */
+align-items: center; /* ✅ توسيط عمودي */
+justify-content: center; /* ✅ توسيط أفقي */
+font-size: 2.5rem; 
+color: rgb(24, 29, 37);
+box-shadow: 0 4px 15px rgba(0, 245, 160, 0.2); 
+margin: 0 auto;
+}
+/* إزالة أي نص داخلي إذا وجد */
+.logo-icon i { margin: 0; }
+
+/* ========================================
+BUTTONS
+======================================== */
+.nextBtn, .prevBtn {
+width: 100%; height: 3em; border-radius: var(--main-border-radius);
+display: flex; align-items: center; justify-content: center; gap: 0.6em;
+text-decoration: none; color: rgb(24, 29, 37); cursor: pointer;
+font-family: "Cairo", sans-serif; font-weight: 700; font-size: 0.95rem;
+transition: all 0.4s ease; border: none;
+}
+.nextBtn { background: linear-gradient(to right, var(--accent), var(--accent-hover)); }
+.nextBtn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.prevBtn {
+font-size: 1.3rem; color: #fff; background-color: transparent; border: none;
+width: auto; height: auto; display: block; transition: opacity 0.2s ease;
+}
+.prevBtn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ========================================
+ERROR MESSAGE
+======================================== */
+.error-msg { color: #ff6b6b; font-size: 0.8rem; display: none; margin-top: 0.3em; }
+.input-error { border-color: #ff6b6b !important; }
+
+/* ========================================
+CUSTOM CHECKBOX & RADIO (✅ تحسين النقر)
+======================================== */
+input[type="checkbox"], input[type="radio"] {
+width: 18px; height: 18px; border-radius: 4px; border: 2px solid rgba(255, 255, 255, 0.2);
+appearance: none; cursor: pointer; position: relative; margin-left: 10px; margin-right: 0;
+transition: all 0.3s ease; flex-shrink: 0; background-color: var(--main-bg-btn);
+pointer-events: none; /* ✅ السماح للنقر بالمرور للحاوية الأم */
+}
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+background: var(--accent); border-color: var(--accent);
+}
+input[type="checkbox"]:checked::after {
+content: "✓"; position: absolute; color: rgb(24, 29, 37); font-weight: bold;
+font-size: 0.75rem; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+input[type="radio"] { border-radius: 50%; }
+input[type="radio"]:checked::after {
+content: ""; position: absolute; width: 8px; height: 8px; background: rgb(24, 29, 37);
+border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+
+/* ========================================
+PASSWORD WRAPPER & CALIBRATOR
+======================================== */
+.passwordWrapper { position: relative; width: 100%; }
+.passwordWrapper input { padding-left: 3em; }
+.togglePassword {
+position: absolute; left: 12px; right: auto; top: 50%; transform: translateY(-50%);
+background: transparent; border: none; cursor: pointer; color: #cbd5e1;
+font-size: 1rem; padding: 0; transition: color 0.2s;
+}
+.togglePassword:hover { color: var(--accent); }
+
+.PasswordCalibrator {
+display: flex; flex-direction: column; gap: 0.6em; padding: 1em;
+border: var(--main-border); border-radius: var(--main-border-radius);
+background-color: var(--main-bg-btn); margin-top: 1em;
+}
+.PasswordCalibrator h2 { font-size: 1rem; color: var(--main-color-text); margin-bottom: 0.3em; }
+.PasswordCalibrator > div { display: flex; align-items: center; }
+
+/* ========================================
+LAYOUT
+======================================== */
+header.formHeader {
+width: 100%; display: flex; flex-direction: column; align-items: center;
+gap: 1em; padding: 2em 2em 1em;
+}
+main { width: 100%; min-height: calc(100vh - 200px); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+main form { width: 100%; max-width: 600px; padding: 0 2em; }
+.formBody { width: 100%; display: flex; flex-direction: column; gap: 1.5em; padding: 1em 0 2em; }
+.formGroup { display: flex; flex-direction: column; gap: 0.3em; }
+
+/* ========================================
+BORN DATE WITH AGE CALCULATOR
+======================================== */
+.bornDateWithAge {
+display: flex; gap: 1em; align-items: center;
+}
+.dateInputs { display: flex; gap: 0.5em; flex: 2; }
+.dateInputs select {
+flex: 1; background-color: var(--main-bg-btn); color: var(--main-color-text);
+border: var(--main-border); border-radius: var(--main-border-radius);
+height: 3em; padding: 0 0.5em; outline: none; font-family: "Cairo", sans-serif;
+}
+.dateInputs select option { background-color: rgb(24, 29, 37); color: #fff; }
+.ageInput { flex: 1; }
+.ageInput input {
+width: 100%; height: 3em; background-color: rgba(255, 255, 255, 0.02);
+border: var(--main-border); border-radius: var(--main-border-radius);
+color: var(--accent); font-weight: bold; text-align: center; cursor: not-allowed;
+}
+
+/* ========================================
+GENDER & STATUS RADIO BUTTONS (✅ حاويات قابلة للنقر)
+======================================== */
+.genderRdio { display: flex; gap: 1em; margin-top: 0.5em; flex-wrap: wrap; }
+
+.radio-option {
+display: flex; align-items: center; padding: 0.5em 1em; 
+border: var(--main-border); border-radius: var(--main-border-radius); 
+cursor: pointer; transition: all 0.2s ease;
+flex: 1; min-width: 80px; justify-content: center; gap: 0.5em;
+user-select: none;
+}
+
+.radio-option:hover {
+border-color: var(--accent); background-color: rgba(0, 245, 160, 0.05);
+}
+
+.radio-option:has(input:checked) {
+border-color: var(--accent); background-color: rgba(0, 245, 160, 0.1); color: var(--accent);
+}
+
+/* ========================================
+POLICY BOXES & DIVIDER
+======================================== */
+.policyBox { display: flex; align-items: flex-start; gap: 0.5em; margin-bottom: 0.5em; }
+.divider { display: flex; align-items: center; gap: 1em; color: #cbd5e1; font-size: 0.875rem; margin: 1em 0; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background-color: rgba(255, 255, 255, 0.1); }
+
+/* ========================================
+SOCIAL LOGIN & SIGN IN LINK
+======================================== */
+.author { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1em; }
+.author a.socialLogin {
+display: flex; align-items: center; justify-content: center; padding: 0.7em;
+border: var(--main-border); border-radius: var(--main-border-radius); width: 100%;
+gap: 0.8em; transition: background-color 0.2s ease; color: var(--main-color-text);
+background-color: var(--main-bg-btn);
+}
+.author a.socialLogin:hover { background-color: rgba(255, 255, 255, 0.1); }
+.doyouhaveacc { display: flex; align-items: center; justify-content: center; gap: 0.5em; margin-top: 1em; }
+.hint { text-align: center; font-size: 0.8rem; color: #cbd5e1; line-height: 1.7; margin-top: 1em; }
+
+/* ========================================
+PROGRESS BAR & STEPS (✅ محاذاة لليمين)
+======================================== */
+header .progress { height: 0.5em; width: 100%; background-color: rgba(255, 255, 255, 0.1); border-radius: var(--main-border-radius); overflow: hidden; }
+header .progress .subProgress { height: 0.5em; background-color: var(--accent); border-radius: var(--main-border-radius); transition: width 0.4s ease; }
+
+/* ✅ تعديل المؤشر ليكون على اليمين وفي سطرين */
+header .stepIndicator { 
+width: 100%; 
+display: flex; 
+flex-direction: column; /* جعل العناصر تحت بعضها */
+align-items: flex-start; /* محاذاة لليمين (البداية في RTL) */
+gap: 0.3em; 
+color: var(--main-color-text); 
+margin-bottom: 0.5em;
+}
+.stepMeta { color: #94a3b8; font-size: 0.8rem; }
+.stepLabel { color: var(--main-color-text); font-size: 0.95rem; font-weight: 600; }
+
+.step { display: none; }
+.step.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ========================================
+FOOTER
+======================================== */
+footer { display: flex; align-items: center; justify-content: center; padding: 1.5em; text-align: center; }
+footer p { font-size: 0.8rem; color: #94a3b8; }
+
+/* ========================================
+RESPONSIVE
+======================================== */
+@media (max-width: 500px) {
+main form { padding: 0 1em; }
+header.formHeader h1 { font-size: 1.7rem; }
+.bornDateWithAge { flex-direction: column; align-items: stretch; }
+.dateInputs { flex-direction: column; }
+.genderRdio { flex-direction: column; }
+.logo-icon { width: 60px; height: 60px; font-size: 2rem; }
+}
+
+/* ========================================
+SOCIAL LINKS ROW STYLE
+======================================== */
+.social-link-row { display: flex; align-items: center; gap: 0.5em; }
+.platform-select {
+width: 35% !important; background-color: var(--main-bg-btn); color: var(--main-color-text);
+border: var(--main-border); border-radius: var(--main-border-radius);
+height: 3em; padding: 0 0.5em; outline: none; font-family: "Cairo", sans-serif;
+}
+.platform-select option { background-color: rgb(24, 29, 37); color: #fff; }
+.link-input {
+flex: 1; background-color: var(--main-bg-btn); color: var(--main-color-text);
+border: var(--main-border); border-radius: var(--main-border-radius);
+height: 3em; padding: 0 10px; outline: none; font-family: "Cairo", sans-serif;
+}
+.link-input:focus, .platform-select:focus { border-color: var(--accent); }

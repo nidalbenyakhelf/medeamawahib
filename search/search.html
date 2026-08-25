@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="theme-color" content="#181d25">
+    <title>بحث - منصة مواهب المدية</title>
+    <!-- خط Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS الخاص بالبحث -->
+    <link rel="stylesheet" href="search.css">
+    
+    <!-- ✅ 1. استدعاء مكتبات Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <div class="search-page-container">
+        
+        <!-- شريط البحث العلوي -->
+        <div class="search-bar-wrapper">
+            <a href="../index.html" class="btn-back" aria-label="عودة للرئيسية">
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن موهبة، اسم، أو مجال...">
+            <button class="btn-search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <!-- شريط فلاتر الفئات الملون -->
+        <div class="categories-strip" id="categoryFilters">
+            <button class="cat-pill active" data-filter="all">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>الكل</span>
+            </button>
+            <button class="cat-pill cp-purple" data-filter="visual_arts">
+                <i class="fa-solid fa-palette"></i>
+                <span>فنون بصرية</span>
+            </button>
+            <button class="cat-pill cp-blue" data-filter="music">
+                <i class="fa-solid fa-music"></i>
+                <span>موسيقى</span>
+            </button>
+            <button class="cat-pill cp-green" data-filter="writing">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>كتابة</span>
+            </button>
+            <button class="cat-pill cp-orange" data-filter="tech">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>تقنية</span>
+            </button>
+            <button class="cat-pill cp-red" data-filter="cinema">
+                <i class="fa-solid fa-video"></i>
+                <span>سينما</span>
+            </button>
+            <button class="cat-pill cp-teal" data-filter="podcast">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <span>بودكاست</span>
+            </button>
+        </div>
+
+        <!-- أدوات النتائج والفلترة -->
+        <div class="results-toolbar">
+            <div class="results-count">
+                عرض <span id="resultsCount">0</span> موهبة
+            </div>
+            
+            <div class="toolbar-actions">
+                <!-- فلتر البلديات -->
+                <div class="custom-select municipality-filter">
+                    <select id="municipalitySelect">
+                        <option value="">كل البلديات</option>
+                        <option value="medea">المدية</option>
+                        <option value="berrouaghia">البرواقية</option>
+                        <option value="tablat">تابلاط</option>
+                        <option value="ksar_el_boukhari">قصر البخاري</option>
+                        <option value="chellalat">شلالة العذاورة</option>
+                        <option value="souaghi">السواقي</option>
+                        <option value="aziz">عزيز</option>
+                        <option value="el_omaria">العمارية</option>
+                        <option value="boghar">بوغار</option>
+                        <option value="other">أخرى</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+
+                <!-- قائمة الترتيب -->
+                <div class="custom-select sort-filter">
+                    <select id="sortSelect">
+                        <option value="newest">الأحدث أولاً</option>
+                        <option value="oldest">الأقدم أولاً</option>
+                        <option value="random">عشوائي</option>
+                    </select>
+                    <i class="fa-solid fa-arrow-down-short-wide select-arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ حاوية الشبكة الديناميكية (فارغة تماماً) -->
+        <div class="talents-grid" id="talentsGrid">
+            <!-- سيتم حقن البطاقات هنا تلقائياً بواسطة search.js -->
+        </div>
+
+        <!-- رسالة عند عدم وجود نتائج -->
+        <div class="no-results" id="noResults" style="display: none;">
+            <i class="fa-regular fa-face-frown-open"></i>
+            <p>عذراً، لم نجد نتائج مطابقة لبحثك.</p>
+        </div>
+
+    </div>
+
+    <!-- ✅ 2. استدعاء ملف الجافاسكريبت -->
+    <script src="search.js"></script>
+</body>
+</html>
