@@ -246,4 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             iconUnmuted.style.display = 'block';
         }
     });
+
 })();
+
