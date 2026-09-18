@@ -871,48 +871,59 @@ main {
 }
 
 /* ========================================== */
-/* ✅ زر الصوت - محسّن للهواتف */
+/* ✅ زر الصوت - حل نهائي يعمل على كل الأجهزة */
 /* ========================================== */
 .mute-toggle {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    background-color: rgba(49, 52, 56, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed; /* ✅ ثابت بالنسبة للشاشة */
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: rgba(49, 52, 56, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 5;
-    font-size: 16px;
-    transition: background-color 0.2s ease;
+    z-index: 1000; /* ✅ أعلى من كل العناصر */
+    font-size: 18px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .mute-toggle:hover {
     background-color: rgba(49, 52, 56, 1);
+    transform: scale(1.05);
+    border-color: rgba(0, 245, 160, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 245, 160, 0.2);
 }
 
-/* ✅ رفع الزر للأعلى على الهواتف فقط */
-@media (max-width: 767px) {
-    .mute-toggle {
-        bottom: 200px; /* ✅ رفع الزر فوق منطقة التمرير */
-        right: 20px;
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
-    }
+.mute-toggle:active {
+    transform: scale(0.95);
 }
 
+/* على الديسكتوب: الزر أكبر قليلاً */
 @media (min-width: 768px) {
     .mute-toggle {
         bottom: 30px;
         right: 30px;
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}
+
+/* على الموبايل الصغير: حجم مناسب للمس */
+@media (max-width: 480px) {
+    .mute-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
     }
 }
