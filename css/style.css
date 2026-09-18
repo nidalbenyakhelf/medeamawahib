@@ -840,10 +840,6 @@ main {
     font-size: 1.5rem;
     color: #fff;
     margin-bottom: 0.5rem;
-    /* background: linear-gradient(to right, #00f5a0, #00d9f5);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent; */
     color: #cbd5e1;
     display: inline-block;
 }
@@ -868,4 +864,30 @@ main {
     .testimonials-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+/* ========================================== */
+/* إضافة بسيطة جداً: زر الصوت (بدون مبالغة) */
+/* ========================================== */
+.mute-toggle {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background-color: rgba(49, 52, 56, 0.8); /* نفس لون أزرار الهيدر تماماً */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.mute-toggle:hover {
+    background-color: rgba(49, 52, 56, 1); /* تغيير بسيط جداً عند التمرير */
 }
