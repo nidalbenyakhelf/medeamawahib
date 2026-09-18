@@ -202,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const counterEl = document.getElementById('talentCount');
         if (!counterEl) return;
         try {
-            // ✅ البحث عن approved واستخدام size بدلاً من count()
             const snapshot = await db.collection('talents')
                 .where('status', '==', 'approved') 
                 .get();
@@ -225,3 +224,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateTalentCounter();
 });
+
+// ==========================================
+// 4. إضافة بسيطة جداً: زر التحكم في صوت الفيديو
+// ==========================================
+(function initMuteToggle() {
+    const video = document.getElementById('heroVideo');
+    const muteBtn = document.getElementById('muteToggle');
+    const iconMuted = document.getElementById('iconMuted');
+    const iconUnmuted = document.getElementById('iconUnmuted');
+    
+    if (!video || !muteBtn) return;
+
+    muteBtn.addEventListener('click', () => {
+        video.muted = !video.muted;
+        if (video.muted) {
+            iconMuted.style.display = 'block';
+            iconUnmuted.style.display = 'none';
+        } else {
+            iconMuted.style.display = 'none';
+            iconUnmuted.style.display = 'block';
+        }
+    });
+})();
