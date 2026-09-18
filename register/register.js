@@ -1,9 +1,6 @@
 /**
- * Yoopedia - Register Logic (Final Version with Duplicate Check & 7 Steps)
+ * منصة مواهب المدية - Register Logic (Final Clean Version)
  */
-// ==========================================
-// 1. إعدادات Firebase
-// ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyBhBuU1OdkHDkcWTNu0G8wzvrjHHM5BsCE",
     authDomain: "medeamawahib.firebaseapp.com",
@@ -13,12 +10,51 @@ const firebaseConfig = {
     appId: "1:292370574224:web:40cf123c34c7401ef32115",
     measurementId: "G-FB8QE8L2JZ"
 };
-firebase.initializeApp(firebaseConfig);
+
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // ==========================================
-// 2. منطق التنقل بين الخطوات (محدث لـ 7 خطوات)
+// نظام الإشعارات الأنيقة (Toast)
 // ==========================================
+function showToast(type, title, message, duration = 5000) {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    const icons = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-circle', info: 'fa-info-circle' };
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `<div class="toast-icon"><i class="fa-solid ${icons[type]}"></i></div>
+        <div class="toast-content"><div class="toast-title">${title}</div><div class="toast-message">${message}</div></div>
+        <button class="toast-close"><i class="fa-solid fa-xmark"></i></button>`;
+    
+    toast.querySelector('.toast-close').addEventListener('click', () => {
+        toast.classList.add('hiding');
+        setTimeout(() => toast.remove(), 300);
+    });
+    container.appendChild(toast);
+    const timer = setTimeout(() => {
+        toast.classList.add('hiding');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+    toast._timer = timer;
+}
+
+// تعطيل أزرار التواصل الاجتماعي
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a.socialLogin').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const platform = link.textContent.includes('Google') ? 'Google' : 'Apple';
+            showToast('warning', 'الخدمة غير متوفرة', `التسجيل عبر ${platform} غير متوفر حالياً. يرجى استخدام البريد الإلكتروني.`, 5000);
+        });
+    });
+});
+
 const steps = document.querySelectorAll(".step");
 const nextButtons = document.querySelectorAll(".nextBtn:not([type='submit'])");
 const prevButtons = document.querySelectorAll(".prevBtn");
@@ -39,19 +75,18 @@ const stepData = [
     { title: "التواصل", iconClass: "fa-solid fa-address-book", fullTitle: "بيانات التواصل" },
     { title: "مراجعة السياسة", iconClass: "fa-solid fa-check-circle", fullTitle: "أوشكت على الانتهاء!" }
 ];
+
 let currentStep = 0;
 
 function showStep(index) {
     steps.forEach(s => s.classList.remove("active"));
-    steps[index]?.classList.add("active");
-    const totalSteps = steps.length;
-    if (totalStepsEl) totalStepsEl.textContent = totalSteps;
-    const progressPercent = ((index + 1) / totalSteps) * 100;
-    if (progressBar) progressBar.style.width = `${progressPercent}%`;
+    if (steps[index]) steps[index].classList.add("active");
+    if (totalStepsEl) totalStepsEl.textContent = steps.length;
+    if (progressBar) progressBar.style.width = `${((index + 1) / steps.length) * 100}%`;
     if (currentStepNum) currentStepNum.textContent = index + 1;
     if (stepTitle && stepData[index]) stepTitle.textContent = stepData[index].title;
     if (dynamicTitle && stepData[index]) dynamicTitle.textContent = stepData[index].fullTitle;
-    if (stepIcon && stepData[index]) stepIcon.innerHTML = `<i class="${stepData[index].iconClass}"></i>`; 
+    if (stepIcon && stepData[index]) stepIcon.innerHTML = `<i class="${stepData[index].iconClass}"></i>`;
     if (index === 4 || index === 5) updateMinorSteps();
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -101,14 +136,14 @@ function calculateAge() {
         let age = today.getFullYear() - birthDate.getFullYear();
         const m = today.getMonth() - birthDate.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-        ageInput.value = age > 0 ? age : "";
+        if (ageInput) ageInput.value = age > 0 ? age : "";
     } else {
-        ageInput.value = "";
+        if (ageInput) ageInput.value = "";
     }
 }
 
 function validatePassword(input) {
-    const value = input?.value || "";
+    const value = input ? input.value : "";
     const ruleLetter = document.getElementById("rule-letter");
     const ruleNumber = document.getElementById("rule-number");
     const ruleLength = document.getElementById("rule-length");
@@ -122,16 +157,15 @@ function validateStep(stepIndex) {
     const currentStepElement = steps[stepIndex];
     if (!currentStepElement) return true;
     let valid = true;
-
     if (stepIndex === 0) {
         const emailInput = document.getElementById("email");
         if (!emailInput || !emailInput.value.trim() || !emailInput.checkValidity()) {
-            emailInput?.classList.add("input-error");
+            if (emailInput) emailInput.classList.add("input-error");
             const errorMsg = emailInput?.parentElement?.querySelector(".error-msg");
             if (errorMsg) errorMsg.style.display = "block";
             valid = false;
         } else {
-            emailInput?.classList.remove("input-error");
+            if (emailInput) emailInput.classList.remove("input-error");
             const errorMsg = emailInput?.parentElement?.querySelector(".error-msg");
             if (errorMsg) errorMsg.style.display = "none";
         }
@@ -140,10 +174,10 @@ function validateStep(stepIndex) {
     if (stepIndex === 1) {
         const passwordInput = document.getElementById("password");
         if (!validatePassword(passwordInput)) {
-            passwordInput?.classList.add("input-error");
+            if (passwordInput) passwordInput.classList.add("input-error");
             valid = false;
         } else {
-            passwordInput?.classList.remove("input-error");
+            if (passwordInput) passwordInput.classList.remove("input-error");
         }
         return valid;
     }
@@ -152,55 +186,36 @@ function validateStep(stepIndex) {
         if (age < 18) {
             const guardianInputs = currentStepElement.querySelectorAll("#minorForm input[required], #minorForm select[required]");
             guardianInputs.forEach(input => {
-                if (!input.value || !input.value.trim()) {
-                    input.classList.add("input-error");
-                    valid = false;
-                } else {
-                    input.classList.remove("input-error");
-                }
+                if (!input.value || !input.value.trim()) { input.classList.add("input-error"); valid = false; }
+                else { input.classList.remove("input-error"); }
             });
             const consent = document.getElementById("parentalConsent");
-            if (consent && !consent.checked) {
-                consent.parentElement.classList.add("input-error");
-                valid = false;
-            } else if (consent) {
-                consent.parentElement.classList.remove("input-error");
-            }
+            if (consent && !consent.checked) { if (consent.parentElement) consent.parentElement.classList.add("input-error"); valid = false; }
+            else if (consent && consent.parentElement) { consent.parentElement.classList.remove("input-error"); }
         }
         return valid;
     }
     if (stepIndex === 6) {
         const checkboxes = currentStepElement.querySelectorAll("input[type='checkbox'][required]");
         checkboxes.forEach(cb => {
-            if (!cb.checked) {
-                cb.parentElement.classList.add("input-error");
-                valid = false;
-            } else {
-                cb.parentElement.classList.remove("input-error");
-            }
+            if (!cb.checked) { if (cb.parentElement) cb.parentElement.classList.add("input-error"); valid = false; }
+            else { if (cb.parentElement) cb.parentElement.classList.remove("input-error"); }
         });
     }
-
     const requiredInputs = currentStepElement.querySelectorAll("input[required], select[required], textarea[required]");
     requiredInputs.forEach(input => {
         if (input.id === "guardianName" || input.id === "guardianEmail" || input.id === "parentalConsent") return;
-        if (!input.value || !input.value.trim()) {
-            input.classList.add("input-error");
-            valid = false;
-        } else {
-            input.classList.remove("input-error");
-        }
+        if (!input.value || !input.value.trim()) { input.classList.add("input-error"); valid = false; }
+        else { input.classList.remove("input-error"); }
     });
     return valid;
 }
 
 nextButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-        if (currentStep < steps.length - 1) {
-            if (validateStep(currentStep)) {
-                currentStep++;
-                showStep(currentStep);
-            }
+        if (currentStep < steps.length - 1 && validateStep(currentStep)) {
+            currentStep++;
+            showStep(currentStep);
         }
     });
 });
@@ -228,78 +243,61 @@ document.querySelectorAll(".radio-option, .policyBox").forEach(option => {
 
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
-passwordInput?.addEventListener("input", () => validatePassword(passwordInput));
-togglePassword?.addEventListener("click", () => {
-    const icon = togglePassword.querySelector("i");
-    if (passwordInput?.type === "password") {
-        passwordInput.type = "text";
-        icon?.classList.replace("fa-eye", "fa-eye-slash");
-    } else {
-        passwordInput.type = "password";
-        icon?.classList.replace("fa-eye-slash", "fa-eye");
-    }
-});
+if (passwordInput) passwordInput.addEventListener("input", () => validatePassword(passwordInput));
+if (togglePassword) {
+    togglePassword.addEventListener("click", () => {
+        const icon = togglePassword.querySelector("i");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            if (icon) { icon.classList.remove("fa-eye"); icon.classList.add("fa-eye-slash"); }
+        } else {
+            passwordInput.type = "password";
+            if (icon) { icon.classList.remove("fa-eye-slash"); icon.classList.add("fa-eye"); }
+        }
+    });
+}
 
-// ==========================================
-// 3. إرسال النموذج إلى Firebase (مع منع التكرار)
-// ==========================================
 registerForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!validateStep(currentStep)) return;
-    
     const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = 'جاري التحقق والتسجيل... <i class="fa-solid fa-spinner fa-spin"></i>';
-    
+    const originalText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'جاري التحقق والتسجيل... <i class="fa-solid fa-spinner fa-spin"></i>';
+    }
     try {
         const formData = new FormData(registerForm);
-        const email = formData.get("email").trim().toLowerCase();
+        const email = formData.get("email") ? formData.get("email").trim().toLowerCase() : '';
+        const existingUserQuery = await db.collection("talents").where("email", "==", email).limit(1).get();
         
-        // ✅ التحقق من عدم تكرار البريد الإلكتروني
-        const existingUserQuery = await db.collection("talents")
-            .where("email", "==", email)
-            .limit(1)
-            .get();
-            
         if (!existingUserQuery.empty) {
-            alert("عذراً، هذا البريد الإلكتروني مسجل لدينا بالفعل.");
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
+            showToast('warning', 'البريد مسجل مسبقاً', 'عذراً، هذا البريد الإلكتروني مسجل لدينا بالفعل.', 5000);
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
             return;
         }
         
-        // ✅ إنشاء مستند جديد
-        const userData = Object.fromEntries(formData.entries());
-        delete userData.profilePic; 
-        delete userData.password; 
+        const userData = {};
+        formData.forEach((value, key) => { userData[key] = value; });
+        delete userData.profilePic;
+        delete userData.password;
         userData.email = email;
-        
-        // ✅ استخدام createdAt ليتطابق مع قاعدة البيانات الحالية
         userData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-        
-        // ✅ استخدام pending ليتطابق مع قاعدة البيانات الحالية
-        userData.status = "pending"; 
-        
-        // معالجة الروابط الاجتماعية
+        userData.status = "pending";
         userData.socialLinks = [];
         for (let i = 1; i <= 3; i++) {
             const platform = formData.get(`platform${i}`);
             const link = formData.get(`link${i}`);
-            if (platform && link) {
-                userData.socialLinks.push({ platform, link });
-            }
+            if (platform && link) userData.socialLinks.push({ platform, link });
         }
         
         await db.collection("talents").add(userData);
-        alert("تم تسجيل موهبتك بنجاح! سيتم مراجعتها وعرضها قريباً.");
-        window.location.href = "../index.html";
-        
+        showToast('success', 'تم التسجيل بنجاح!', 'تم تسجيل موهبتك بنجاح! سيتم مراجعتها وعرضها قريباً.', 5000);
+        setTimeout(() => { window.location.href = "../index.html"; }, 3000);
     } catch (error) {
         console.error("Error adding document: ", error);
-        alert("حدث خطأ أثناء التسجيل: " + error.message);
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
+        showToast('error', 'حدث خطأ', 'حدث خطأ أثناء التسجيل: ' + error.message);
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
     }
 });
 
