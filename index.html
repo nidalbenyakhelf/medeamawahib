@@ -52,17 +52,17 @@
       </div>
     </header>
 
-    <main>
-      <div class="video-container">
-        <video id="heroVideo" src="assets/images/mainVideo2.mp4" autoplay muted loop playsinline></video>
-        <div class="video-overlay"></div>
-      </div>
-
-      <!-- زر التحكم في صوت الفيديو (خارج video-container تماماً) -->
-      <button id="muteToggle" class="mute-toggle" title="تشغيل/إيقاف الصوت" aria-label="تشغيل/إيقاف الصوت">
-        <i id="iconMuted" class="fa-solid fa-volume-xmark"></i>
-        <i id="iconUnmuted" class="fa-solid fa-volume-high" style="display: none;"></i>
-      </button>
+   <main>
+  <div class="video-container">
+    <video id="heroVideo" src="assets/images/mainVideo2.mp4" autoplay muted loop playsinline></video>
+    <div class="video-overlay"></div>
+    
+    <!-- ✅ الزر الآن داخل video-container -->
+    <button id="muteToggle" class="mute-toggle" title="تشغيل/إيقاف الصوت" aria-label="تشغيل/إيقاف الصوت">
+      <i id="iconMuted" class="fa-solid fa-volume-xmark"></i>
+      <i id="iconUnmuted" class="fa-solid fa-volume-high" style="display: none;"></i>
+    </button>
+  </div>
 
       <div class="hero-content">
         <h1>منصة مواهب المدية</h1>
