@@ -57,40 +57,39 @@
     <video id="heroVideo" src="assets/images/mainVideo2.mp4" autoplay muted loop playsinline></video>
     <div class="video-overlay"></div>
     
-    <!-- ✅ الزر الآن داخل الفيديو -->
-    <button id="muteToggle" class="mute-toggle" title="تشغيل/إيقاف الصوت" aria-label="تشغيل/إيقاف الصوت">
+    <!-- ✅ الزر هنا، داخل video-container ومباشرة قبل إغلاقها -->
+    <button id="muteToggle" class="mute-toggle" type="button" title="تشغيل/إيقاف الصوت">
       <i id="iconMuted" class="fa-solid fa-volume-xmark"></i>
-      <i id="iconUnmuted" class="fa-solid fa-volume-high"></i>
+      <i id="iconUnmuted" class="fa-solid fa-volume-high" style="display: none;"></i>
     </button>
-  </div>
-  </div>
-  </div>
+  </div> 
+  <!-- ⚠️ تم حذف الـ </div> الزائدة التي كانت هنا -->
 
-      <div class="hero-content">
-        <h1>منصة مواهب المدية</h1>
-        <p>الحاضنة الأولى للإبداع والتميز</p>
-        <div class="btns">
-          <a href="register/register.html" class="button primary-btn">سجل كموهبة</a>
-          <a href="search/search.html" class="button">المواهب</a>
-        </div>
-        <div class="trust-indicators">
-          <div class="trust-item">
-            <span class="trust-number">50K+</span>
-            <span class="trust-label">متابع</span>
-          </div>
-          <div class="trust-divider"></div>
-          <div class="trust-item">
-            <span class="trust-number" id="talentCount"></span>
-            <span class="trust-label">موهبة مسجلة</span>
-          </div>
-        </div>
+  <div class="hero-content">
+    <h1>منصة مواهب المدية</h1>
+    <p>الحاضنة الأولى للإبداع والتميز</p>
+    <div class="btns">
+      <a href="register/register.html" class="button primary-btn">سجل كموهبة</a>
+      <a href="search/search.html" class="button">المواهب</a>
+    </div>
+    <div class="trust-indicators">
+      <div class="trust-item">
+        <span class="trust-number">50K+</span>
+        <span class="trust-label">متابع</span>
       </div>
+      <div class="trust-divider"></div>
+      <div class="trust-item">
+        <span class="trust-number" id="talentCount">0+</span>
+        <span class="trust-label">موهبة مسجلة</span>
+      </div>
+    </div>
+  </div>
 
-      <div class="bottom-glow"></div>
-      <button class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">
-        <i class="fa-solid fa-chevron-down"></i>
-      </button>
-    </main>
+  <div class="bottom-glow"></div>
+  <button class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</main>
 
     <section id="about" class="about-section">
       <div class="container">
