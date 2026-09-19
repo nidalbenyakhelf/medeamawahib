@@ -74,11 +74,11 @@ header .btn-group-header .search-btn button {
     font-size: 1.1rem;
 }
 
-/* header .btn-group-header button:hover,
+header .btn-group-header button:hover,
 header .btn-group-header .search-btn button:hover {
     background-color: rgba(0, 245, 160, 0.2);
     color: #00f5a0;
-} */
+}
 
 header .btn-group-header a {
     text-decoration: none;
@@ -219,6 +219,7 @@ main {
     object-fit: cover;
 }
 
+/* ✅ الحل الجذري: السماح للنقر بالمرور عبر الطبقة الشفافة */
 .video-overlay {
     position: absolute;
     top: 0;
@@ -236,7 +237,7 @@ main {
         rgba(24, 29, 37, 0.85) 88%,
         rgb(24, 29, 37) 100%
     );
-    pointer-events: none;
+    pointer-events: none !important; 
 }
 
 .hero-content {
@@ -393,7 +394,7 @@ main {
 }
 
 /* ========================================== */
-/* ✅ زر الصوت - تصميم احترافي داخل الفيديو */
+/* ✅ الحل الجذري: تنسيق الزر الوحيد والنهائي */
 /* ========================================== */
 .mute-toggle {
     position: absolute;
@@ -411,18 +412,19 @@ main {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    z-index: 50 !important; /* أعلى من أي عنصر آخر */
     font-size: 20px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto !important; /* إجبار المتصفح على استقبال اللمس */
+    touch-action: manipulation; /* تحسين الاستجابة على شاشات اللمس */
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    padding: 0;
 }
 
 .mute-toggle:hover {
     background: rgba(0, 245, 160, 0.25);
     border-color: rgba(0, 245, 160, 0.5);
     transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(0, 245, 160, 0.3);
 }
 
 .mute-toggle:active {
@@ -509,6 +511,16 @@ main {
         width: 52px;
         height: 52px;
         font-size: 22px;
+    }
+}
+
+@media (max-width: 767px) {
+    .mute-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
     }
 }
 
@@ -861,134 +873,9 @@ main {
 /* Media Queries للأقسام السفلية */
 @media (min-width: 768px) {
     .section-header h2 { font-size: 2.5rem; }
-    
     .newsletter-form { flex-direction: row; }
     .input-group { flex: 2; }
     .select-group { flex: 1; }
     .submit-btn { flex: 0 0 120px; }
-
     .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
-}
-/* ========================================== */
-/* ✅ زر الصوت - متجاوب تماماً */
-/* ========================================== */
-.mute-toggle {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    padding: 0;
-}
-
-.mute-toggle:hover {
-    background: rgba(0, 245, 160, 0.25);
-    border-color: rgba(0, 245, 160, 0.5);
-    transform: scale(1.1);
-}
-
-.mute-toggle:active {
-    transform: scale(0.95);
-}
-
-/* الموبايل */
-@media (max-width: 767px) {
-    .mute-toggle {
-        bottom: 15px;
-        right: 15px;
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
-    }
-}
-
-/* الحاسوب */
-@media (min-width: 768px) {
-    .mute-toggle {
-        bottom: 30px;
-        right: 30px;
-        width: 52px;
-        height: 52px;
-        font-size: 22px;
-    }
-}
-/* ========================================== */
-/* ✅ الحل الجذري: إجبار الزر على استقبال اللمس */
-/* ========================================== */
-
-/* 1. السماح للنقر بالمرور عبر الطبقة الشفافة */
-.video-overlay {
-    pointer-events: none !important; 
-}
-
-/* 2. تنسيق الزر مع خصائص منع التداخل */
-.mute-toggle {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 50 !important; /* أعلى من أي عنصر آخر */
-    font-size: 20px;
-    pointer-events: auto !important; /* إجبار المتصفح على استقبال اللمس */
-    touch-action: manipulation; /* تحسين الاستجابة على شاشات اللمس */
-    -webkit-tap-highlight-color: transparent;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.mute-toggle:hover {
-    background: rgba(0, 245, 160, 0.25);
-    border-color: rgba(0, 245, 160, 0.5);
-    transform: scale(1.1);
-}
-
-.mute-toggle:active {
-    transform: scale(0.95);
-}
-
-/* الموبايل */
-@media (max-width: 767px) {
-    .mute-toggle {
-        bottom: 15px;
-        right: 15px;
-        width: 44px;
-        height: 44px;
-        font-size: 18px;
-    }
-}
-
-/* الحاسوب */
-@media (min-width: 768px) {
-    .mute-toggle {
-        bottom: 30px;
-        right: 30px;
-        width: 52px;
-        height: 52px;
-        font-size: 22px;
-    }
 }
