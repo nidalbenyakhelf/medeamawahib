@@ -871,11 +871,11 @@ main {
 }
 
 /* ========================================== */
-/* ✅ زر الصوت - حل نهائي يعمل على كل الأجهزة */
+/* ✅ زر الصوت - داخل الفيديو فقط */
 /* ========================================== */
 .mute-toggle {
-    position: fixed; /* ✅ ثابت بالنسبة للشاشة */
-    bottom: 20px;
+    position: absolute; /* ✅ داخل الفيديو فقط */
+    bottom: 15%; /* ✅ عند نهاية التدرج */
     right: 20px;
     width: 44px;
     height: 44px;
@@ -887,7 +887,7 @@ main {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 1000; /* ✅ أعلى من كل العناصر */
+    z-index: 10; /* ✅ أعلى من الفيديو */
     font-size: 18px;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
@@ -906,10 +906,10 @@ main {
     transform: scale(0.95);
 }
 
-/* على الديسكتوب: الزر أكبر قليلاً */
+/* على الديسكتوب: الزر أكبر قليلاً وفي نفس المكان */
 @media (min-width: 768px) {
     .mute-toggle {
-        bottom: 30px;
+        bottom: 12%; /* ✅ عند نهاية التدرج */
         right: 30px;
         width: 48px;
         height: 48px;
@@ -917,10 +917,10 @@ main {
     }
 }
 
-/* على الموبايل الصغير: حجم مناسب للمس */
+/* على الموبايل الصغير */
 @media (max-width: 480px) {
     .mute-toggle {
-        bottom: 15px;
+        bottom: 18%; /* ✅ عند نهاية التدرج */
         right: 15px;
         width: 42px;
         height: 42px;
