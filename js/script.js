@@ -164,3 +164,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ==========================================
+// ✅ التحكم في صوت الفيديو (الحل النهائي)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('heroVideo');
+    const muteToggle = document.getElementById('muteToggle');
+    const iconMuted = document.getElementById('iconMuted');
+    const iconUnmuted = document.getElementById('iconUnmuted');
+    
+    if (video && muteToggle) {
+        // التأكد من أن الفيديو يبدأ صامتاً
+        video.muted = true;
+        
+        // ضبط الأيقونات الابتدائية
+        if (iconMuted) iconMuted.style.display = 'block';
+        if (iconUnmuted) iconUnmuted.style.display = 'none';
+        
+        // حدث النقر على الزر
+        muteToggle.addEventListener('click', function() {
+            video.muted = !video.muted;
+            
+            if (video.muted) {
+                // الفيديو صامت
+                if (iconMuted) iconMuted.style.display = 'block';
+                if (iconUnmuted) iconUnmuted.style.display = 'none';
+            } else {
+                // الفيديو بصوت
+                if (iconMuted) iconMuted.style.display = 'none';
+                if (iconUnmuted) iconUnmuted.style.display = 'block';
+                
+                // محاولة تشغيل الفيديو
+                video.play().catch(function(err) {
+                    console.log('خطأ في تشغيل الفيديو:', err);
+                });
+            }
+        });
+        
+        console.log('✅ زر الصوت جاهز للعمل');
+    } else {
+        console.error('❌ لم يتم العثور على الفيديو أو زر الصوت');
+    }
+});
