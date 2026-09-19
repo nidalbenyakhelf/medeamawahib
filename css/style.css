@@ -74,11 +74,11 @@ header .btn-group-header .search-btn button {
     font-size: 1.1rem;
 }
 
-header .btn-group-header button:hover,
+/* header .btn-group-header button:hover,
 header .btn-group-header .search-btn button:hover {
     background-color: rgba(0, 245, 160, 0.2);
     color: #00f5a0;
-}
+} */
 
 header .btn-group-header a {
     text-decoration: none;
