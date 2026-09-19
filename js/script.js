@@ -207,3 +207,41 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ لم يتم العثور على الفيديو أو زر الصوت');
     }
 });
+// ==========================================
+// ✅ التحكم في صوت الفيديو (نسخة مقاومة للأخطاء)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('heroVideo');
+    const muteToggle = document.getElementById('muteToggle');
+    const iconMuted = document.getElementById('iconMuted');
+    const iconUnmuted = document.getElementById('iconUnmuted');
+
+    if (video && muteToggle) {
+        console.log("✅ تم العثور على الزر والفيديو بنجاح");
+
+        // التأكد من أن الفيديو يبدأ صامتاً
+        video.muted = true;
+        if(iconMuted) iconMuted.style.display = 'block';
+        if(iconUnmuted) iconUnmuted.style.display = 'none';
+
+        muteToggle.addEventListener('click', function(e) {
+            e.preventDefault();      // منع أي سلوك افتراضي
+            e.stopPropagation();     // منع الحدث من الانتشار للأب (يمنع السرقة)
+            console.log("🔊 تم النقر على الزر بنجاح!");
+
+            video.muted = !video.muted;
+
+            if (video.muted) {
+                if(iconMuted) iconMuted.style.display = 'block';
+                if(iconUnmuted) iconUnmuted.style.display = 'none';
+            } else {
+                if(iconMuted) iconMuted.style.display = 'none';
+                if(iconUnmuted) iconUnmuted.style.display = 'block';
+                
+                video.play().catch(err => console.log('محاولة تشغيل:', err));
+            }
+        });
+    } else {
+        console.error("❌ فشل العثور على الفيديو أو الزر. تأكد من تطابق الـ IDs في HTML");
+    }
+});
