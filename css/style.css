@@ -926,3 +926,69 @@ main {
         font-size: 22px;
     }
 }
+/* ========================================== */
+/* ✅ الحل الجذري: إجبار الزر على استقبال اللمس */
+/* ========================================== */
+
+/* 1. السماح للنقر بالمرور عبر الطبقة الشفافة */
+.video-overlay {
+    pointer-events: none !important; 
+}
+
+/* 2. تنسيق الزر مع خصائص منع التداخل */
+.mute-toggle {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50 !important; /* أعلى من أي عنصر آخر */
+    font-size: 20px;
+    pointer-events: auto !important; /* إجبار المتصفح على استقبال اللمس */
+    touch-action: manipulation; /* تحسين الاستجابة على شاشات اللمس */
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mute-toggle:hover {
+    background: rgba(0, 245, 160, 0.25);
+    border-color: rgba(0, 245, 160, 0.5);
+    transform: scale(1.1);
+}
+
+.mute-toggle:active {
+    transform: scale(0.95);
+}
+
+/* الموبايل */
+@media (max-width: 767px) {
+    .mute-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+}
+
+/* الحاسوب */
+@media (min-width: 768px) {
+    .mute-toggle {
+        bottom: 30px;
+        right: 30px;
+        width: 52px;
+        height: 52px;
+        font-size: 22px;
+    }
+}
