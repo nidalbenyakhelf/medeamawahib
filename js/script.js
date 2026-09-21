@@ -38,21 +38,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- ج. التحكم في القائمة المنبثقة (Profile List) ---
+    // --- ج. التحكم في القائمة المنبثقة (Profile List) - [تم التعديل لحل المشكلتين] ---
     const toggleBtn = document.querySelector('[data-toggle="profileList"]');
     const popup = document.querySelector('.profileList');
     const closeBtn = document.querySelector('.btnClose');
 
+    // دالة مساعدة لفتح القائمة وقفل خلفية الموقع
+    function openPopup() {
+        if (popup) {
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden'; // منع تمرير الموقع الخلفي
+        }
+    }
+
+    // دالة مساعدة لإغلاق القائمة وفك قفل خلفية الموقع
+    function closePopup() {
+        if (popup) {
+            popup.classList.remove('active');
+            document.body.style.overflow = ''; // إعادة تمرير الموقع الخلفي
+        }
+    }
+
     if (toggleBtn && popup) {
         toggleBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            popup.classList.add('active');
+            openPopup();
         });
     }
 
     if (closeBtn && popup) {
         closeBtn.addEventListener('click', () => {
-            popup.classList.remove('active');
+            closePopup();
         });
     }
 
@@ -60,10 +76,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', (e) => {
         if (popup && popup.classList.contains('active')) {
             if (!popup.contains(e.target) && !toggleBtn.contains(e.target)) {
-                popup.classList.remove('active');
+                closePopup();
             }
         }
     });
+
+    // ✅ حل المشكلة الأولى: إغلاق القائمة عند النقر على أي رابط داخلها
+    const popupLinks = popup.querySelectorAll('a');
+    popupLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closePopup();
+        });
+    });
+
 
     // --- د. ✅ التحكم في صوت الفيديو (النسخة المقاومة للأخطاء 100%) ---
     const video = document.getElementById('heroVideo');
@@ -74,31 +99,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (video && muteToggle) {
         console.log("✅ تم العثور على الزر والفيديو بنجاح");
         
-        // التأكد من أن الفيديو يبدأ صامتاً (مطلوب للتشغيل التلقائي)
         video.muted = true;
         
-        // ضبط حالة الأيقونات الابتدائية
         if (iconMuted) iconMuted.style.display = 'block';
         if (iconUnmuted) iconUnmuted.style.display = 'none';
 
         muteToggle.addEventListener('click', function(e) {
-            e.preventDefault();      // منع أي سلوك افتراضي
-            e.stopPropagation();     // منع الحدث من الانتشار للأب (يمنع سرقة النقرة)
-            console.log("🔊 تم النقر على زر الصوت بنجاح!");
+            e.preventDefault();      
+            e.stopPropagation();     
 
-            // عكس حالة الصوت
             video.muted = !video.muted;
 
             if (video.muted) {
-                // إذا أصبح صامتاً
                 if (iconMuted) iconMuted.style.display = 'block';
                 if (iconUnmuted) iconUnmuted.style.display = 'none';
             } else {
-                // إذا تم تشغيل الصوت
                 if (iconMuted) iconMuted.style.display = 'none';
                 if (iconUnmuted) iconUnmuted.style.display = 'block';
                 
-                // محاولة تشغيل الفيديو لضمان عمل الصوت
                 video.play().catch(err => {
                     console.log('محاولة تشغيل الفيديو:', err);
                 });
